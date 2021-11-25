@@ -13,10 +13,8 @@
 <strong>
 Rage is a tool written in Python3 allowing you to inject a
 <br>
- <a href="https://github.com/billythegoat356/Riot">Python3 complete Discord token grabber (Riot)</a> script in a Microsoft Document using macros.
-<br><br><br>
+Python3 complete <a href="https://github.com/billythegoat356/Riot">Discord token grabber (Riot)</a> script in a Microsoft Document using macros.
 </strong>
-<img src="link" width="750", height="400">
 </p>
 <br>
 
@@ -39,7 +37,7 @@ Rage is a tool written in Python3 allowing you to inject a
 <br>
 <strong>- Not automatic, you will have to follow the tutorial and create the macro yourself</strong>
 <br>
-<strong>- The victim needs Python3 to execute the script</strong>
+<strong>- The victim needs Python3 to execute the malicious script</strong>
 <br><br>
 
 -----
