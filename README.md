@@ -36,8 +36,6 @@ choose between a custom file (.exe, .py, etc) or a Python3 complete <a href="htt
 
 <br>
 <strong>- Not automatic, you will have to follow the tutorial and create the macro yourself</strong>
-<br>
-<strong>- The victim needs Python3 to execute the Discord token grabber script</strong>
 <br><br>
 
 -----
