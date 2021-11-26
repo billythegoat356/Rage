@@ -25,7 +25,7 @@ choose between a custom file (.exe, .py, etc) or a Python3 complete <a href="htt
 <br><br>
 <strong>+ Very advanced token grabber, infecting the victim (moving to startup) and sending the new token if the password is changed</strong>
 <br>
-<strong>+ Walkthrough well explained</strong>
+<strong>+ Tutorial on how to create Microsoft macros</strong>
 <br>
 <strong>+ Can be used with any Microsoft Document file (Word, Excel, Powerpoint...)</strong>
 <br>
