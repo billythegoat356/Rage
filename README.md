@@ -13,7 +13,7 @@
 <strong>
 Rage is a tool written in Python3 allowing you to inject any file in a Microsoft Office Document, you can
 <br>
-choose between a custom file (.exe, .py, etc) or a Python3 complete <a href="https://github.com/billythegoat356/Riot">Discord token grabber (Riot)</a> script in a Microsoft Document using macros.
+choose between a custom file (.exe, .py, etc) or a Python3 complete <a href="https://github.com/billythegoat356/Riot">Discord token grabber (Riot)</a> script in a Microsoft  Office Document using macros.
 </strong>
 </p>
 <br>
@@ -27,7 +27,7 @@ choose between a custom file (.exe, .py, etc) or a Python3 complete <a href="htt
 <br>
 <strong>+ Tutorial on how to create Microsoft Office macros</strong>
 <br>
-<strong>+ Can be used with any Microsoft Document file (Word, Excel, Powerpoint...)</strong>
+<strong>+ Can be used with any Microsoft Office Document file (Word, Excel, Powerpoint...)</strong>
 <br>
 
 <p align="right">
