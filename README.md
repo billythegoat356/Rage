@@ -23,7 +23,7 @@ choose between a custom file (.exe, .py, etc) or a Python3 complete <a href="htt
 ### <p align="center">⭐ Features ⭐</p>
 
 <br><br>
-<strong>+ Very advanced token grabber, infecting the victim (moving to startup) and sending the new token if the password is changed</strong>
+<strong>+ Very advanced token grabber click <a href="https://github.com/billythegoat356/Riot">here</a> to learn more</strong>
 <br>
 <strong>+ Tutorial on how to create Microsoft Office macros</strong>
 <br>
